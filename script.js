@@ -35,6 +35,26 @@ function getCityName(lon, lat){
         console.log(response.current.sunrise);
         console.log(response.current.sunset);
     });
+  }
+});
+
+currentDate()
+
+function currentDate() {
+  var date = new Date();
+  var day = date.getDate();
+  var month = date.getMonth();
+  var year = date.getFullYear();
+  var currentDate = `${day.toString()}/${month.toString() + 1}/${year.toString()}`;
+  console.log(currentDate);
 }
 
-});
+currentWeekday();
+
+function currentWeekday() {
+    var date = new Date();
+    var weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var currentWeekday = weekday[date.getDay()];
+    console.log(currentWeekday);
+}
+
