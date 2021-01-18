@@ -11,6 +11,13 @@ $(".btn_submit").on("click", function (e) {
   };
 
   $.ajax(settings).done(function (response) {
-    console.log(response);
+     // Collect Array Objects API
+     console.log(response);
+     // Collect Temperature
+     console.log(response.main.temp);
+     // Collect Sunrise
+     console.log(response.sys.sunrise);
+     // Collect Sunset
+     console.log(response.sys.sunset);
   });
 });
