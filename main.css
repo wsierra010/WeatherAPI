@@ -1,0 +1,55 @@
+body {
+    max-width: 450px;
+    margin: 0 auto;
+    font-family: 'Roboto' , sans-serif;
+}
+
+
+button {
+    cursor: pointer;
+    outline: none;
+}
+
+input {
+    outline: none;
+}
+
+.query_container {
+    background-color: rgb(89, 108, 218);
+}
+
+.query_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5%;
+}
+
+.query_label {
+    font-size: 25px;
+    margin: 20px 5%;
+    color: white;
+}
+
+.query_input {
+    display: flex;
+    justify-content: center;
+}
+
+
+.input  {
+    height: 45px;
+    padding: 0 10px;
+    border-radius: 20px;
+    border: 1px solid gray;
+    margin: 5px;
+    width: 70%;
+}
+
+.btn_search {
+    border-radius: 50px;
+    height: 45px;
+    width: 45px;
+    border:  none;
+    margin: 5px;
+}
