@@ -5,12 +5,14 @@ var settings = {
 };
 
 $.ajax(settings).done(function (response) {
+    // Collect Array Objects API
     console.log(response);
-
-
-
-
-
+    // Collect Temperature
+    console.log(response.main.temp);
+    // Collect Sunrise
+    console.log(response.sys.sunrise);
+    // Collect Sunset
+    console.log(response.sys.sunset);
 
 });
 
