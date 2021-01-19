@@ -43,7 +43,8 @@ $(".btn_search").on("click", function (e) {
     }
 });
 
-    currentDate()
+  currentDate()
+  
   function currentDate() {
   var date = new Date();
   var day = date.getDate();
@@ -65,9 +66,3 @@ function currentWeekday() {
 $(".sidebar_toggle").on("click", function(){
   $(".sidebar_container").toggle();
 })
-
-  var currentDate = new Date();
-  var day = currentDate.getDate();
-  var month = currentDate.getMonth();
-  var year = currentDate.getFullYear();
-  console.log(`${day.toString()}/${month.toString() + 1}/${year.toString()}`);

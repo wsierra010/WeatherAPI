@@ -22,13 +22,13 @@ input {
     color: white;
     cursor: pointer;
     padding: 5%;
+    float: right;
 }
 
 .sidebar_container {
   display: none;
   background-color: rgba(0,0,0,0.2);
   padding: 5%;
-  margin-top: -61px;
   height: 100%;
 
 }
@@ -71,4 +71,12 @@ input {
 
 .results_container {
     padding: 5%;
+}
+
+.week_weather__nav ul {
+    list-style: none;
+    color: white;
+    line-height: 2em;
+    text-align: right;
+    margin: 10%;
 }
