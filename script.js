@@ -1,3 +1,5 @@
+$(document)
+
 $(".btn_search").on("click", function (e) {
   e.preventDefault();
 
@@ -30,10 +32,11 @@ $(".btn_search").on("click", function (e) {
     };
 
     $.ajax(settings).done(function (response) {
-      console.log(response);
-      console.log(response.current.temp);
-      console.log(response.current.sunrise);
-      console.log(response.current.sunset);
+        console.log(response);
+        console.log(response.current.temp);
+        console.log(response.current.sunrise);
+        console.log(response.current.sunset);
+        console.log(response.hourly)
     });
   }
 });
@@ -41,11 +44,30 @@ $(".btn_search").on("click", function (e) {
 currentDate()
 
 function currentDate() {
+  var date = new Date();
+  var day = date.getDate();
+  var month = date.getMonth();
+  var year = date.getFullYear();
+  var currentDate = `${day.toString()}/${month.toString() + 1}/${year.toString()}`;
+  console.log(currentDate);
+}
+
+currentWeekday();
+
+function currentWeekday() {
+    var date = new Date();
+    var weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var currentWeekday = weekday[date.getDay()];
+    console.log(currentWeekday);
+}
+
+$(".sidebar_toggle").on("click", function(){
+  $(".sidebar_container").toggle();
+})
+
   var currentDate = new Date();
   var day = currentDate.getDate();
   var month = currentDate.getMonth();
   var year = currentDate.getFullYear();
   console.log(`${day.toString()}/${month.toString() + 1}/${year.toString()}`);
 }
-
-
