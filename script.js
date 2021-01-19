@@ -2,7 +2,11 @@ $(document)
 
 $(".btn_search").on("click", function (e) {
     e.preventDefault();
+    $('.weather_details').html('');
+    $('.weather_preview').html('');
 
+
+    var currentWeather = {};
     var city = $("#city").val();
     console.log(city);
 
@@ -22,6 +26,7 @@ $(".btn_search").on("click", function (e) {
         // Collect Sunset
         // console.log(response.sys.sunset);
         getCityName(response.coord.lon, response.coord.lat);
+        currentWeather=response;
     });
 
     function getCityName(lon, lat) {
@@ -32,14 +37,53 @@ $(".btn_search").on("click", function (e) {
         };
 
         $.ajax(settings).done(function (response) {
-        const NowDate = response.current.sunrise;
-        const d = new Date(NowDate*1000);
-        console.log('La hora del amanecer es a las '+ d.getHours());
-        // console.log(response);
-        // console.log(response.current.temp);
+        const NowDateSunrise = response.current.sunrise;
+        const NowDateSunset = response.current.sunset;
+        // Date Sunrise Current
+        const dSunrise = new Date(NowDateSunrise*1000);
+        const hourSunrise = dSunrise.getHours();
+        const minuteSunrise = dSunrise.getMinutes();
+        // Date Sunset Current
+        const dSunset = new Date(NowDateSunset*1000);
+        const hourSunset = dSunset.getHours();
+        const minuteSunset = dSunset.getMinutes();
+        // Degrees only Int
+        const degree = Math.round(response.current.temp);
+        // Feels Like round
+        const feelsLike = Math.round(response.current.feels_like);
+
+        // console.log(Math.round(degree));
+        // console.log(dSunset.getHours());
+        // console.log(new Date(response.current.dt).getHours());
+        // console.log(new Date(prueba*1000).getHours());
         // console.log(response.current.sunrise);
         // console.log(response.current.sunset);
 
+        $('.weather_details').append(
+            `<div class="weather_details__temp">
+                <p class="weather_details_temp__city">${city}</p>
+                <p class="weather_details_temp__degrees">${degree}º </p>
+                <p class="weather_details_temp__feelsLike">feels like ${feelsLike}º</p>
+            </div>
+            <div class="weather_details__info">
+                <div class="weather_details_info__sunset">
+                    <img class="weather_details_info__img" src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
+                    <p class="weather_details_info_sunset__hour">${hourSunrise+':'+minuteSunrise}h</p>
+                </div>
+                <div class="weather_details_info__sunrise">
+                    <img class="weather_details_info__img" src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
+                    <p class="weather_details_info_sunrise__hour">${hourSunset+':'+minuteSunset}h</p>
+                </div>
+                <div class="weather_details_info__minTemp">
+                    <img src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
+                    <p class="weather_details_info_minTemp__data">min: ${currentWeather.main.temp_min}º</p>
+                </div>
+                <div class="weather_details_info__maxTemp">
+                    <img src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
+                    <p class="weather_details_info_maxTemp__data">max: ${currentWeather.main.temp_max}º</p>
+                </div>
+            </div>`
+        );
 
         getWeatherPreviewResume(response.current.weather[0].main);
         getWeatherPreviewMain(response.current.weather[0].main);
@@ -47,11 +91,23 @@ $(".btn_search").on("click", function (e) {
 
 
         });
-    }
+}
+
 });
 
+currentDate();
+function currentDate() {
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth();
+    var year = date.getFullYear();
+    var currentDate = `${day.toString()}/${month.toString() + 1}/${year.toString()}`;
+    console.log(currentDate);
+}
 
-  function getWeatherPreviewResume(sky){
+currentWeekday();
+
+function getWeatherPreviewResume(sky){
 
     var weatherPreviewResume = $('<div class="weather_preview__resume"></div>');
     var resumeTemp = $(`<p class="resume_temp">Cold</p>`);
@@ -63,10 +119,10 @@ $(".btn_search").on("click", function (e) {
     weatherPreviewResume.append(resumeSky);
     weatherPreviewResume.append(resumeDaytime);
 
-    console.log(sky)
-  }
+    console.log(sky);
+}
 
-  function getWeatherPreviewMain(sky){
+function getWeatherPreviewMain(sky){
 
     var weatherPreviewMain = $('<div class="weather_preview__main"></div>');
     var mainDate = $(`<p>${currentDate()}</p>`)
@@ -78,9 +134,9 @@ $(".btn_search").on("click", function (e) {
     weatherPreviewMain.append(mainDate);
     weatherPreviewMain.append(mainIcon);
 
-  }
+}
 
-  function getWeatherPreviewWind(speed, degrees){
+function getWeatherPreviewWind(speed, degrees){
 
     var weatherPreviewWind = $('<div class="weather_preview__wind"></div>');
     var windSpeed = $(`<i class="wi wi-wind wi-from-e"></i>`)
@@ -90,17 +146,17 @@ $(".btn_search").on("click", function (e) {
     weatherPreviewWind.append(windSpeed);
     weatherPreviewWind.append(windDregrees);
 
-  }
+}
 
-  
-  function currentDate() {
-  var date = new Date();
-  var day = date.getDate();
-  var month = date.getMonth();
-  var year = date.getFullYear();
-  var currentDate = `${day.toString()}/${month.toString() + 1}/${year.toString()}`;
-  console.log(currentDate);
-  return currentDate;
+
+function currentDate() {
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth();
+    var year = date.getFullYear();
+    var currentDate = `${day.toString()}/${month.toString() + 1}/${year.toString()}`;
+    console.log(currentDate);
+    return currentDate;
 }
 
 
@@ -114,7 +170,5 @@ function currentWeekday() {
 }
 
 $(".sidebar_toggle").on("click", function(){
-  $(".sidebar_container").toggle();
+    $(".sidebar_container").toggle();
 })
-
-
