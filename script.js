@@ -22,6 +22,7 @@ $(".btn_search").on("click", function (e) {
         // Collect Sunset
         // console.log(response.sys.sunset);
         getCityName(response.coord.lon, response.coord.lat);
+
     });
 
     function getCityName(lon, lat) {
@@ -42,8 +43,34 @@ $(".btn_search").on("click", function (e) {
         // console.log(response.current.temp);
         // console.log(response.current.sunrise);
         // console.log(response.current.sunset);
+        $('.weather_details').append(
+            `<div class="weather_details__temp">
+                <p class="weather_details_temp__city">${city}</p>
+                <p class="weather_details_temp__degrees">${response.current.temp}º </p>
+                <p class="weather_details_temp__feelsLike">feels like ${response.current.feels_like}º</p>
+            </div>
+            <div class="weather_details__info">
+                <div class="weather_details_info__sunset">
+                    <img class="weather_details_info__img" src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
+                    <p class="weather_details_info_sunset__hour">Hour Sunset</p>
+                </div>
+                <div class="weather_details_info__sunrise">
+                    <img class="weather_details_info__img" src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
+                    <p class="weather_details_info_sunrise__hour">Hour Sunrise</p>
+                </div>
+                <div class="weather_details_info__minTemp">
+                    <img src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
+                    <p class="weather_details_info_minTemp__data">min: 12º</p>
+                </div>
+                <div class="weather_details_info__maxTemp">
+                    <img src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
+                    <p class="weather_details_info_maxTemp__data">max: 28º</p>
+                </div>
+            </div>`
+        );
         });
     }
+
 });
 
 currentDate();
@@ -69,7 +96,5 @@ $(".sidebar_toggle").on("click", function(){
 })
 
 $(document).ready(function () {
-    $('.parameters_weather').append(
-        
-    );
+
 });
