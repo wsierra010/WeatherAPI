@@ -22,7 +22,6 @@ $(".btn_search").on("click", function (e) {
         // Collect Sunset
         // console.log(response.sys.sunset);
         getCityName(response.coord.lon, response.coord.lat);
-      
     });
 
     function getCityName(lon, lat) {
@@ -33,10 +32,13 @@ $(".btn_search").on("click", function (e) {
         };
 
         $.ajax(settings).done(function (response) {
-        console.log(response);
-        console.log(response.current.temp);
-        console.log(response.current.sunrise);
-        console.log(response.current.sunset);
+        const NowDate = response.current.sunrise;
+        const d = new Date(NowDate*1000);
+        console.log('La hora del amanecer es a las '+ d.getHours());
+        // console.log(response);
+        // console.log(response.current.temp);
+        // console.log(response.current.sunrise);
+        // console.log(response.current.sunset);
         });
     }
 });
@@ -69,4 +71,3 @@ $(".sidebar_toggle").on("click", function(){
   var month = currentDate.getMonth();
   var year = currentDate.getFullYear();
   console.log(`${day.toString()}/${month.toString() + 1}/${year.toString()}`);
-}
