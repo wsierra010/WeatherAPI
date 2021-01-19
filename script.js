@@ -2,6 +2,9 @@ $(document)
 
 $(".btn_search").on("click", function (e) {
     e.preventDefault();
+    $('.weather_details').html('');
+    $('.weather_preview').html('');
+
 
     var currentWeather = {};
     var city = $("#city").val();
@@ -56,7 +59,6 @@ $(".btn_search").on("click", function (e) {
         // console.log(response.current.sunrise);
         // console.log(response.current.sunset);
 
-        $('.weather_details').html('');
         $('.weather_details').append(
             `<div class="weather_details__temp">
                 <p class="weather_details_temp__city">${city}</p>
@@ -117,7 +119,7 @@ function getWeatherPreviewResume(sky){
     weatherPreviewResume.append(resumeSky);
     weatherPreviewResume.append(resumeDaytime);
 
-    console.log(sky)
+    console.log(sky);
 }
 
 function getWeatherPreviewMain(sky){

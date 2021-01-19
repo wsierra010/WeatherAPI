@@ -1,6 +1,6 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
+/* http://meyerweb.com/eric/tools/css/reset/
+  v2.0 | 20110126
+  License: none (public domain)
 */
 
 html, body, div, span, applet, object, iframe,
@@ -12,8 +12,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -24,12 +24,15 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-	display: block;
+  display: block;
 }
 body {
-	line-height: 1;
+  /* max-width: 450px; */
+  line-height: 1;
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
 }
 ol, ul {
 	list-style: none;
@@ -46,26 +49,14 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
-
-
-
-body {
-  /* max-width: 450px; */
-  margin: 0 auto;
-  font-family: "Roboto", sans-serif;
-  box-sizing: border-box;
-}
-
 button {
   cursor: pointer;
   outline: none;
 }
-
 input {
   outline: none;
 }
-
+/* FONTS IMPORT TEXT AREA */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 
@@ -126,6 +117,7 @@ input {
 .results_container {
   padding: 5%;
   background-color: rgb(89, 108, 218);
+  /* border: 1px solid red; */
 }
 
 .week_weather__nav ul {
@@ -147,7 +139,6 @@ input {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  
 }
 
 .weather_preview__main p {
@@ -191,15 +182,34 @@ input {
   /* border: 1px solid red; */
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: baseline;
+  flex-wrap: wrap;
+  /* border: 1px solid white; */
+  color: white;
 }
-.weather_details_info__sunset,
-.weather_details_info__sunrise,
-.weather_details_info__minTemp,
-.weather_details_info__maxTemp{
+.weather_details_info__sunset{
+  /* flex: 10; */
+  width: 40%;
   border: 1px solid white;
-  flex-direction: row;
-  font-size: 12px;
+  text-align: center;
+}
+.weather_details_info__sunrise{
+  /* flex: 10; */
+  width: 40%;
+  border: 1px solid white;
+  text-align: center;
+}
+.weather_details_info__minTemp{
+  /* flex: 5; */
+  width: 40%;
+  border: 1px solid white;
+  text-align: center;
+}
+.weather_details_info__maxTemp{
+  /* flex: 5; */
+  width: 40%;
+  border: 1px solid white;
+  text-align: center;
 }
 
