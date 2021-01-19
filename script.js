@@ -39,11 +39,59 @@ $(".btn_search").on("click", function (e) {
         // console.log(response.current.temp);
         // console.log(response.current.sunrise);
         // console.log(response.current.sunset);
+
+
+        getWeatherPreviewResume(response.current.weather[0].main);
+        getWeatherPreviewMain(response.current.weather[0].main);
+        getWeatherPreviewWind(response.current.wind_speed,response.current.wind_deg);
+
+
         });
     }
 });
 
-  currentDate()
+
+  function getWeatherPreviewResume(sky){
+
+    var weatherPreviewResume = $('<div class="weather_preview__resume"></div>');
+    var resumeTemp = $(`<p class="resume_temp">Cold</p>`);
+    var resumeSky = $(`<p class="resume_sky">${sky}</p>`);
+    var resumeDaytime = $(` <p class="resume_daytime">day</p>`)
+
+    $(".weather_preview").append(weatherPreviewResume);
+    weatherPreviewResume.append(resumeTemp);
+    weatherPreviewResume.append(resumeSky);
+    weatherPreviewResume.append(resumeDaytime);
+
+    console.log(sky)
+  }
+
+  function getWeatherPreviewMain(sky){
+
+    var weatherPreviewMain = $('<div class="weather_preview__main"></div>');
+    var mainDate = $(`<p>${currentDate()}</p>`)
+    var mainWeekDay = $(`<p>${currentWeekday()}</p>`)
+    var mainIcon = $(`<img src="./assets/icons/cloudy-day-1.svg"/>`)
+
+    $(".weather_preview").append(weatherPreviewMain);
+    weatherPreviewMain.append(mainWeekDay);
+    weatherPreviewMain.append(mainDate);
+    weatherPreviewMain.append(mainIcon);
+
+  }
+
+  function getWeatherPreviewWind(speed, degrees){
+
+    var weatherPreviewWind = $('<div class="weather_preview__wind"></div>');
+    var windSpeed = $(`<i class="wi wi-wind wi-from-e"></i>`)
+    var windDregrees = $(`<i class="wi wi-wind wi-cloud"></i>`)
+
+    $(".weather_preview").append(weatherPreviewWind);
+    weatherPreviewWind.append(windSpeed);
+    weatherPreviewWind.append(windDregrees);
+
+  }
+
   
   function currentDate() {
   var date = new Date();
@@ -52,17 +100,21 @@ $(".btn_search").on("click", function (e) {
   var year = date.getFullYear();
   var currentDate = `${day.toString()}/${month.toString() + 1}/${year.toString()}`;
   console.log(currentDate);
+  return currentDate;
 }
 
-currentWeekday();
+
 
 function currentWeekday() {
     var date = new Date();
     var weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     var currentWeekday = weekday[date.getDay()];
     console.log(currentWeekday);
+    return currentWeekday;
 }
 
 $(".sidebar_toggle").on("click", function(){
   $(".sidebar_container").toggle();
 })
+
+
