@@ -1,3 +1,5 @@
+$(document)
+
 $(".btn_search").on("click", function (e) {
   e.preventDefault();
 
@@ -34,6 +36,7 @@ function getCityName(lon, lat){
         console.log(response.current.temp);
         console.log(response.current.sunrise);
         console.log(response.current.sunset);
+        console.log(response.hourly)
     });
   }
 });
@@ -57,4 +60,8 @@ function currentWeekday() {
     var currentWeekday = weekday[date.getDay()];
     console.log(currentWeekday);
 }
+
+$(".sidebar_toggle").on("click", function(){
+  $(".sidebar_container").toggle();
+})
 
