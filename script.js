@@ -24,17 +24,25 @@ $.ajax(settings).done(function (response) {
 
 function getCityName(lon, lat){
     var settings = {
-        "url": `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=ef8c46d94877be6e25c248a610296d01&units=metric`,
+        "url": `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=ef8c46d94877be6e25c248a610296d01&units=metric`,
         "method": "GET",
         "timeout": 0,
     };
 
     $.ajax(settings).done(function (response) {
+        const date = response.current.sunrise;
+        // console.log(d.getTime());
+        const d = new Date(date);
+        console.log(d);
         console.log(response);
         console.log(response.current.temp);
         console.log(response.current.sunrise);
         console.log(response.current.sunset);
-    });
-}
 
+        // response.hourly.forEach(e => {
+        //     console.log(e.response.hourly);
+        // });
+    });
+
+}
 });
