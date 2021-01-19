@@ -21,13 +21,13 @@ input {
     color: white;
     cursor: pointer;
     padding: 5%;
+    float: right;
 }
 
 .sidebar_container {
   display: none;
   background-color: rgba(0,0,0,0.2);
   padding: 5%;
-  margin-top: -61px;
   height: 100%;
   border: 1px solid red;
 
@@ -38,7 +38,6 @@ input {
   flex-direction: column;
   justify-content: center;
   margin-top: 40px;
- 
 }
 
 .query_label {
@@ -72,4 +71,27 @@ input {
 .results_container {
     padding: 5%;
     border: 1px solid red;
+}
+
+.week_weather__nav ul {
+    list-style: none;
+    color: white;
+    line-height: 2em;
+    text-align: right;
+    margin: 10%;
+}
+.weather_details{
+  display: flex;
+  flex-direction: row;
+}
+.weather_details__temp{
+  border: 1px solid red;
+}
+.weather_details__info{
+  border: 1px solid red;
+  display: flex;
+  flex-direction: row;
+}
+.weather_details_info__sunset, .weather_details_info__sunrise, .weather_details_info__minTemp, .weather_details_info__maxTemp{
+  border: 1px solid white;
 }

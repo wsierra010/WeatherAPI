@@ -23,17 +23,49 @@
                         <button type="submit" class="btn_search"><i class="fas fa-search"></i></button>
                     </div>
                 </form>
+                <nav class="week_weather__nav">
+                    <ul>
+                        <li>Day +1</li>
+                        <li>Day +2</li>
+                        <li>Day +3</li>
+                        <li>Day +4</li>
+                        <li>Day +5</li>
+                        <li>Day +6</li>
+                        <li>Day +7</li>
+                    </ul>
+                </nav>
             </section>
         </aside>
-        <section class="results_container">
-            <article class="current_weather"></article>
-            <article class="parameters_weather">
-                <div class="parameters_weather__temp">
-                    <p class="parameters_weather_temp__city">Barcelona, Spain</p>
-                    <p class="parameters_weather_temp_degrees"></p>
-                </div>
-                <div class="">
 
+        <section class="results_container">
+            <article class="weather_preview"></article>
+
+            <article class="weather_details">
+
+                <div class="weather_details__temp">
+                    <p class="weather_details_temp__city">Barcelona, Spain</p>
+                    <p class="weather_details_temp__degrees">22º</p>
+                    <p class="weather_details_temp__feelsLike">Feels like 20º</p>
+                </div>
+
+                <div class="weather_details__info">
+                    <div class="weather_details_info__sunset">
+                        <img class="weather_details_info__img" src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
+                        <p class="weather_details_info_sunset__hour">Hour Sunset</p>
+                    </div>
+                    <div class="weather_details_info__sunrise">
+                        <img class="weather_details_info__img" src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
+                        <p class="weather_details_info_sunrise__hour">Hour Sunrise</p>
+                    </div>
+
+                    <div class="weather_details_info__minTemp">
+                        <img src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
+                        <p class="weather_details_info_minTemp__data">min: 12º</p>
+                    </div>
+                    <div class="weather_details_info__maxTemp">
+                        <img src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
+                        <p class="weather_details_info_maxTemp__data">max: 28º</p>
+                    </div>
                 </div>
             </article>
         </section>
