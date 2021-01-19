@@ -67,7 +67,7 @@ $(".btn_search").on("click", function (e) {
                 </div>
                 <div class="weather_details_info__sunrise">
                     <img class="weather_details_info__img" src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
-                    <p class="weather_details_info_sunrise__hour">${hourSunset+':'+minuteSunset}</p>
+                    <p class="weather_details_info_sunrise__hour">${hourSunset+':'+minuteSunset}h</p>
                 </div>
                 <div class="weather_details_info__minTemp">
                     <img src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
