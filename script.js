@@ -1,12 +1,16 @@
-$(document)
+$(".sidebar_toggle").on("click", function(){
+  $(".sidebar_container").toggle();
+})
 
 $(".btn_search").on("click", function (e) {
     e.preventDefault();
     $('.weather_details').html('');
     $('.weather_preview').html('');
 
+    $(".sidebar_container").hide();
 
     var currentWeather = {};
+
     var city = $("#city").val();
     console.log(city);
 
@@ -95,17 +99,6 @@ $(".btn_search").on("click", function (e) {
 
 });
 
-currentDate();
-function currentDate() {
-    var date = new Date();
-    var day = date.getDate();
-    var month = date.getMonth();
-    var year = date.getFullYear();
-    var currentDate = `${day.toString()}/${month.toString() + 1}/${year.toString()}`;
-    console.log(currentDate);
-}
-
-currentWeekday();
 
 function getWeatherPreviewResume(sky){
 
@@ -125,8 +118,8 @@ function getWeatherPreviewResume(sky){
 function getWeatherPreviewMain(sky){
 
     var weatherPreviewMain = $('<div class="weather_preview__main"></div>');
-    var mainDate = $(`<p>${currentDate()}</p>`)
-    var mainWeekDay = $(`<p>${currentWeekday()}</p>`)
+    var mainDate = $(`<p>${getCurrentDate()}</p>`)
+    var mainWeekDay = $(`<p>${getCurrentWeekday()}</p>`)
     var mainIcon = $(`<img src="./assets/icons/cloudy-day-1.svg"/>`)
 
     $(".weather_preview").append(weatherPreviewMain);
@@ -146,22 +139,22 @@ function getWeatherPreviewWind(speed, degrees){
     weatherPreviewWind.append(windSpeed);
     weatherPreviewWind.append(windDregrees);
 
+  }
+
+  
+  function getCurrentDate() {
+  var date = new Date();
+  var day = date.getDate();
+  var month = date.getMonth();
+  var year = date.getFullYear();
+  var currentDate = `${day.toString()}/${month.toString() + 1}/${year.toString()}`;
+  console.log(currentDate);
+  return currentDate;
 }
 
 
-function currentDate() {
-    var date = new Date();
-    var day = date.getDate();
-    var month = date.getMonth();
-    var year = date.getFullYear();
-    var currentDate = `${day.toString()}/${month.toString() + 1}/${year.toString()}`;
-    console.log(currentDate);
-    return currentDate;
-}
 
-
-
-function currentWeekday() {
+function getCurrentWeekday() {
     var date = new Date();
     var weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     var currentWeekday = weekday[date.getDay()];
@@ -169,6 +162,4 @@ function currentWeekday() {
     return currentWeekday;
 }
 
-$(".sidebar_toggle").on("click", function(){
-    $(".sidebar_container").toggle();
-})
+
