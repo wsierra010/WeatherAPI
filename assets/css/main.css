@@ -51,13 +51,10 @@ table {
 
 
 body {
-  max-width: 450px;
+  /* max-width: 450px; */
   margin: 0 auto;
   font-family: "Roboto", sans-serif;
-}
-
-main {
-  background-color: rgb(89, 108, 218);
+  box-sizing: border-box;
 }
 
 button {
@@ -73,19 +70,22 @@ input {
 
 
 .sidebar_toggle {
-    color: white;
-    cursor: pointer;
-    padding: 5%;
-    float: right;
+  color: white;
+  cursor: pointer;
+  padding: 5%;
+  position: fixed;
+  z-index: 10;
+  right: 5%;
 }
 
 .sidebar_container {
   display: none;
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0, 0, 0, 0.6);
   padding: 5%;
   height: 100%;
-  border: 1px solid red;
-
+  width: 100%;
+  position: fixed;
+  z-index: 1;
 }
 
 .query_container {
@@ -124,16 +124,45 @@ input {
 }
 
 .results_container {
-    padding: 5%;
-    border: 1px solid red;
+  padding: 5%;
+  background-color: rgb(89, 108, 218);
 }
 
 .week_weather__nav ul {
-    list-style: none;
-    color: white;
-    line-height: 2em;
-    text-align: right;
-    margin: 10%;
+  list-style: none;
+  color: white;
+  line-height: 2em;
+  text-align: right;
+  margin: 10%;
+}
+
+.weather_preview__resume p {
+  color: white;
+  font-size: 20px;
+  margin: 0 10px;
+}
+
+.weather_preview__main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  
+}
+
+.weather_preview__main p {
+  color: white;
+  font-size: 20px;
+  margin: 0 10px;
+}
+
+.weather_preview__main p:first-child {
+  font-size: 28px;
+}
+
+.weather_preview__main img {
+  width: 70%;
+  margin: 0 auto;
 }
 .weather_details{
   display: flex;
