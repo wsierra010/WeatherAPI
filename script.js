@@ -44,12 +44,15 @@ $(".btn_search").on("click", function (e) {
         const dSunset = new Date(NowDateSunset*1000);
         const hourSunset = dSunset.getHours();
         const minuteSunset = dSunset.getMinutes();
+        // Degrees only Int
+        const degree = Math.round(response.current.temp);
+        // Feels Like round
+        const feelsLike = Math.round(response.current.feels_like);
 
-        const prueba = response.daily[0].dt;
-
-        console.log(dSunset.getHours());
-        console.log(new Date(response.current.dt).getHours());
-        console.log(new Date(prueba*1000).getHours());
+        // console.log(Math.round(degree));
+        // console.log(dSunset.getHours());
+        // console.log(new Date(response.current.dt).getHours());
+        // console.log(new Date(prueba*1000).getHours());
         // console.log(response.current.sunrise);
         // console.log(response.current.sunset);
 
@@ -57,8 +60,8 @@ $(".btn_search").on("click", function (e) {
         $('.weather_details').append(
             `<div class="weather_details__temp">
                 <p class="weather_details_temp__city">${city}</p>
-                <p class="weather_details_temp__degrees">${response.current.temp}º </p>
-                <p class="weather_details_temp__feelsLike">feels like ${response.current.feels_like}º</p>
+                <p class="weather_details_temp__degrees">${degree}º </p>
+                <p class="weather_details_temp__feelsLike">feels like ${feelsLike}º</p>
             </div>
             <div class="weather_details__info">
                 <div class="weather_details_info__sunset">
