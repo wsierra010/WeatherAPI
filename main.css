@@ -6,7 +6,6 @@ body {
 
 main {
   background-color: rgb(89, 108, 218);
-  
 }
 
 button {
@@ -30,6 +29,7 @@ input {
   padding: 5%;
   margin-top: -61px;
   height: 100%;
+  border: 1px solid red;
 
 }
 
@@ -71,4 +71,5 @@ input {
 
 .results_container {
     padding: 5%;
+    border: 1px solid red;
 }

@@ -32,9 +32,12 @@ $(".btn_search").on("click", function (e) {
         };
 
         $.ajax(settings).done(function (response) {
-        const NowDate = response.current.sunrise;
-        const d = new Date(NowDate*1000);
-        console.log('La hora del amanecer es a las '+ d.getHours());
+        const NowDateSunrise = response.current.sunrise;
+        const NowDateSunset = response.current.sunset;
+        const dSunrise = new Date(NowDateSunrise*1000);
+        const dSunset = new Date(NowDateSunset*1000);
+        console.log('La hora del amanecer es a las '+ dSunrise.getHours());
+        console.log('La hora del atardecer es a las '+ dSunset.getHours());
         // console.log(response);
         // console.log(response.current.temp);
         // console.log(response.current.sunrise);
