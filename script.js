@@ -75,11 +75,11 @@ $(".btn_search").on("click", function (e) {
                     <p class="weather_details_info_sunrise__hour">${hourSunset+':'+minuteSunset}h</p>
                 </div>
                 <div class="weather_details_info__minTemp">
-                    <img src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
+                    <img class="weather_details_info_img" src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
                     <p class="weather_details_info_minTemp__data">min: ${currentWeather.main.temp_min}º</p>
                 </div>
                 <div class="weather_details_info__maxTemp">
-                    <img src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
+                    <img class="weather_details_info_img" src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
                     <p class="weather_details_info_maxTemp__data">max: ${currentWeather.main.temp_max}º</p>
                 </div>
             </div>`
