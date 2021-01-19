@@ -3,6 +3,7 @@ $(document)
 $(".btn_search").on("click", function (e) {
     e.preventDefault();
 
+    var currentWeather = {};
     var city = $("#city").val();
     console.log(city);
 
@@ -22,7 +23,7 @@ $(".btn_search").on("click", function (e) {
         // Collect Sunset
         // console.log(response.sys.sunset);
         getCityName(response.coord.lon, response.coord.lat);
-
+        currentWeather=response;
     });
 
     function getCityName(lon, lat) {
@@ -35,14 +36,24 @@ $(".btn_search").on("click", function (e) {
         $.ajax(settings).done(function (response) {
         const NowDateSunrise = response.current.sunrise;
         const NowDateSunset = response.current.sunset;
+        // Date Sunrise Current
         const dSunrise = new Date(NowDateSunrise*1000);
+        const hourSunrise = dSunrise.getHours();
+        const minuteSunrise = dSunrise.getMinutes();
+        // Date Sunset Current
         const dSunset = new Date(NowDateSunset*1000);
-        console.log('La hora del amanecer es a las '+ dSunrise.getHours());
-        console.log('La hora del atardecer es a las '+ dSunset.getHours());
-        // console.log(response);
-        // console.log(response.current.temp);
+        const hourSunset = dSunset.getHours();
+        const minuteSunset = dSunset.getMinutes();
+
+        const prueba = response.daily[0].dt;
+
+        console.log(dSunset.getHours());
+        console.log(new Date(response.current.dt).getHours());
+        console.log(new Date(prueba*1000).getHours());
         // console.log(response.current.sunrise);
         // console.log(response.current.sunset);
+
+        $('.weather_details').html('');
         $('.weather_details').append(
             `<div class="weather_details__temp">
                 <p class="weather_details_temp__city">${city}</p>
@@ -52,24 +63,24 @@ $(".btn_search").on("click", function (e) {
             <div class="weather_details__info">
                 <div class="weather_details_info__sunset">
                     <img class="weather_details_info__img" src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
-                    <p class="weather_details_info_sunset__hour">Hour Sunset</p>
+                    <p class="weather_details_info_sunset__hour">${hourSunrise+':'+minuteSunrise}h</p>
                 </div>
                 <div class="weather_details_info__sunrise">
                     <img class="weather_details_info__img" src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
-                    <p class="weather_details_info_sunrise__hour">Hour Sunrise</p>
+                    <p class="weather_details_info_sunrise__hour">${hourSunset+':'+minuteSunset}</p>
                 </div>
                 <div class="weather_details_info__minTemp">
                     <img src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
-                    <p class="weather_details_info_minTemp__data">min: 12º</p>
+                    <p class="weather_details_info_minTemp__data">min: ${currentWeather.main.temp_min}º</p>
                 </div>
                 <div class="weather_details_info__maxTemp">
                     <img src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
-                    <p class="weather_details_info_maxTemp__data">max: 28º</p>
+                    <p class="weather_details_info_maxTemp__data">max: ${currentWeather.main.temp_max}º</p>
                 </div>
             </div>`
         );
         });
-    }
+}
 
 });
 
