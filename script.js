@@ -72,6 +72,9 @@ function getCityName(lon, lat) {
         var minuteSunrise = new Date(sunriseTime).getMinutes();
         // console.log(senseibleSunset + " : " + senseibleSunset1);
 
+        const hour1 = new Date((response.hourly[0].dt)*1000);
+        const hourNow = hour1.getHours();
+
 
          // console.log(Math.round(degree));
          // console.log(dSunset.getHours());
@@ -105,6 +108,24 @@ function getCityName(lon, lat) {
                 </div>
             </div>`
     );
+    response.hourly.forEach((e,i) => {
+        if(i<=23){
+            // Milliseconds to Hours
+            const hour1 = new Date((e.dt)*1000);
+            const hourNow = hour1.getHours();
+            // Temp round
+            const tempHour = Math.round(e.temp);
+
+
+            $('.weather_hours').append(
+                `<div class="weather_hours__1">
+                <p class="weather_hours_1__hour">${hourNow}</p>
+                <img class="weather_hours_1__icon" src="assets/icons/rainy-1.svg" alt="">
+                <p class="weather_hours_1__temp">${tempHour}º</p>
+            </div>`
+                )
+        }
+    });
 
     var temperatureFeel = getTemperatureState(
         Math.round(response.current.temp)
