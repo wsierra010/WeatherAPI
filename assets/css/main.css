@@ -159,6 +159,7 @@ input {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  /* border: 1px solid yellow; */
 }
 
 .weather_details__temp{
@@ -167,15 +168,19 @@ input {
   font-family: 'Montserrat', sans-serif;
 }
 .weather_details_temp__city{
-  font-size: 14px;
-  padding: 0 0 10px 0;
+  font-size: 1em;
+  font-weight: 600;
+  padding: 20% 0 0;
 }
 .weather_details_temp__degrees{
-  font-size: 4.5em;
+  font-size: 5em;
+  font-weight: 600;
+  margin: 15% 0 0 7%;
 }
 .weather_details_temp__feelsLike{
   font-size: 0.75em;
-  padding: 5px 0 0;
+  font-weight: 300;
+  padding: 8% 0 0;
 }
 
 
@@ -189,32 +194,62 @@ input {
   /* border: 1px solid white; */
   color: white;
   font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
 }
-..weather_details_info__img{
-  margin: 10px;
+.weather_details_info__img{
+  width: 42px;
+  margin: 10px 0px;
 }
 .weather_details_info__sunset{
   /* flex: 10; */
   width: 40%;
-  /* border: 1px solid white; */
+  border: 1px solid white;
   text-align: center;
 }
 .weather_details_info__sunrise{
   /* flex: 10; */
   width: 40%;
-  /* border: 1px solid white; */
+  border: 1px solid white;
   text-align: center;
 }
 .weather_details_info__minTemp{
   /* flex: 5; */
   width: 40%;
-  /* border: 1px solid white; */
+  border: 1px solid white;
   text-align: center;
 }
 .weather_details_info__maxTemp{
   /* flex: 5; */
   width: 40%;
-  /* border: 1px solid white; */
+  border: 1px solid white;
   text-align: center;
+}
+
+.weather_hours{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 3em 0 0;
+
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+.weather_hours > div{
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  transform-origin: center center;
+  transform: scale(1);
+  transition: transform 0.5s;
+}
+.weather_hours__one,
+.weather_hours__two,
+.weather_hours__three,
+.weather_hours__four,
+.weather_hours__five{
+  border: 1px solid white;
+  /* width: 100px; */
 }
 

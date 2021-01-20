@@ -56,6 +56,11 @@ $(".btn_search").on("click", function (e) {
         // Feels Like round
         const feelsLike = Math.round(response.current.feels_like);
 
+        // Max Temp round
+        const maxTemp = Math.round(currentWeather.main.temp_max);
+        // Min Temp round
+        const minTemp = Math.round(currentWeather.main.temp_min)
+
         // console.log(Math.round(degree));
         // console.log(dSunset.getHours());
         // console.log(new Date(response.current.dt).getHours());
@@ -71,20 +76,20 @@ $(".btn_search").on("click", function (e) {
             </div>
             <div class="weather_details__info">
                 <div class="weather_details_info__sunset">
-                    <img class="weather_details_info__img" src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
+                    <img src="assets/icons/sunset.svg" alt="sunsetIcon" class="weather_details_info__img">
                     <p class="weather_details_info_sunset__hour">${hourSunrise+':'+minuteSunrise}h</p>
                 </div>
                 <div class="weather_details_info__sunrise">
-                    <img class="weather_details_info__img" src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
+                    <img class="weather_details_info__img" src="assets/icons/sunset.svg" alt="">
                     <p class="weather_details_info_sunrise__hour">${hourSunset+':'+minuteSunset}h</p>
                 </div>
                 <div class="weather_details_info__minTemp">
-                    <img class="weather_details_info_img" src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
-                    <p class="weather_details_info_minTemp__data">min: ${currentWeather.main.temp_min}º</p>
+                    <img class="weather_details_info__img" src="assets/icons/coldTherm.svg" alt="">
+                    <p class="weather_details_info_minTemp__data">${minTemp}º</p>
                 </div>
                 <div class="weather_details_info__maxTemp">
-                    <img class="weather_details_info_img" src="http://dummyimage.com/40x40/4d494d/686a82.gif&text=" alt="placeholder+image">
-                    <p class="weather_details_info_maxTemp__data">max: ${currentWeather.main.temp_max}º</p>
+                    <img class="weather_details_info__img" src="assets/icons/hotTherm.svg" alt="">
+                    <p class="weather_details_info_maxTemp__data">${maxTemp}º</p>
                 </div>
             </div>`
         );
