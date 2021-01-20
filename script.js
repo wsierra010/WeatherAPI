@@ -109,6 +109,7 @@ $(".btn_search").on("click", function (e) {
             </div>`
     );
     response.hourly.forEach((e,i) => {
+        // console.log(getSkyIcon(e.weather.main));
         if(i<=23){
             // Milliseconds to Hours
             const hour1 = new Date((e.dt)*1000);
@@ -118,10 +119,10 @@ $(".btn_search").on("click", function (e) {
 
 
             $('.weather_hours').append(
-                `<div class="weather_hours__1">
-                <p class="weather_hours_1__hour">${hourNow}</p>
-                <img class="weather_hours_1__icon" src="assets/icons/rainy-1.svg" alt="">
-                <p class="weather_hours_1__temp">${tempHour}º</p>
+                `<div class="weather_hours__container">
+                <p class="weather_hours_container__hour">${hourNow}</p>
+                <img class="weather_hours_container__icon" src="${getSkyIcon(e.weather[0].main)}" alt="">
+                <p class="weather_hours_container__temp">${tempHour}º</p>
             </div>`
                 )
         }
