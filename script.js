@@ -1,26 +1,26 @@
 $(".sidebar_toggle").on("click", function () {
-    $(".sidebar_container").toggle();
+  $(".sidebar_container").toggle();
 });
 
 $(".btn_search").on("click", function (e) {
-    e.preventDefault();
-$(".weather_details").html("");
-$(".weather_preview").html("");
+  e.preventDefault();
+  $(".weather_details").html("");
+  $(".weather_preview").html("");
 
-$(".sidebar_container").hide();
+  $(".sidebar_container").hide();
 
-var currentWeather = {};
+  var currentWeather = {};
 
-var city = $("#city").val();
-console.log(city);
+  var city = $("#city").val();
+  console.log(city);
 
-var settings = {
+  var settings = {
     url: `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=84001e7bfdb9a6e78a0b7b03512f2b90&units=metric`,
     method: "GET",
     timeout: 0,
-};
+  };
 
-$.ajax(settings).done(function (response) {
+  $.ajax(settings).done(function (response) {
     // Collect Array Objects API
     // console.log(response);
     // Collect Temperature
@@ -31,13 +31,13 @@ $.ajax(settings).done(function (response) {
     // console.log(response.sys.sunset);
     getCityName(response.coord.lon, response.coord.lat);
     currentWeather = response;
-});
+  });
 
-function getCityName(lon, lat) {
+  function getCityName(lon, lat) {
     var settings = {
-        url: `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=ef8c46d94877be6e25c248a610296d01&units=metric`,
-        method: "GET",
-        timeout: 0,
+      url: `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=ef8c46d94877be6e25c248a610296d01&units=metric`,
+      method: "GET",
+      timeout: 0,
     };
 
         $.ajax(settings).done(function (response) {
@@ -127,157 +127,201 @@ function getCityName(lon, lat) {
         }
     });
 
-    var temperatureFeel = getTemperatureState(
+      var temperatureFeel = getTemperatureState(
         Math.round(response.current.temp)
-    ).feel;
-    var daytime = getDaytime(
+      ).feel;
+
+      var daytime = getDaytime(
         response.timezone,
         response.current.sunrise,
         response.current.sunset
-    );
-        var skyIcon = getSkyIcon(response.current.weather[0].main);
-    getWeatherPreviewResume(
+      );
+
+      printWeatherPreviewResume(
         temperatureFeel,
         response.current.weather[0].main,
         daytime
-    );
-    getWeatherPreviewMain(skyIcon);
-    getWeatherPreviewWind(
+      );
+
+      var skyIcon = getSkyIcon(response.current.weather[0].main);
+      console.log(skyIcon);
+      printWeatherPreviewMain(skyIcon);
+
+      getWeatherPreviewWind(
         response.current.wind_speed,
         response.current.wind_deg
-    );
+      );
     });
-    }
+  }
 });
 
-function getSkyIcon(skyIcon) {}
+function getSkyIcon(sky) {
+
+  var setSkyState;
+
+  var skyState = {
+    thunderstorm : "./assets/icons/thunder.svg",
+    drizzle : "./assets/icons/rainy-2.svg",
+    rain : "./assets/icons/rainy-5.svg",
+    snow : "./assets/icons/snowy-3.svg",
+    athmosphere : "./assets/icons/cloudy-day-1.svg",
+    clear : "./assets/icons/day.svg",
+    clouds : "./assets/icons/cloudy.svg",
+  }
+
+  switch (sky) {
+    case "Thunderstorm":
+      setSkyState = skyState.thunderstorm;
+      break;
+    case "Drizzle":
+      setSkyState = skyState.drizzle;
+      break;
+    case "Rain":
+      setSkyState = skyState.rain;
+      break;
+    case "Snow":
+      setSkyState = skyState.snow;
+      break;
+    case "Atmosphere ":
+      setSkyState = skyState.athmosphere;
+      break;
+    case "Clear":
+      setSkyState = skyState.clear;
+      break;
+    case "Clouds":
+      setSkyState = skyState.clouds;
+      break;
+    default:
+      setSkyState = skyState.athmosphere;
+  }
+
+  return setSkyState;
+
+}
 
 function getTemperatureState(temperature) {
-    var veryLow = {
-        feel: "Very Cold",
-        color: "white",
-    };
+  var veryLow = {
+    feel: "Very Cold",
+    color: "white",
+  };
 
-    var low = {
-        feel: "Cold",
-        color: "blue",
-    };
+  var low = {
+    feel: "Cold",
+    color: "blue",
+  };
 
-    var stable = {
-        feel: "Warm",
-        color: "green",
-    };
+  var stable = {
+    feel: "Warm",
+    color: "green",
+  };
 
-    var high = {
-        feel: "High",
-        color: "orange",
-    };
+  var high = {
+    feel: "High",
+    color: "orange",
+  };
 
-    var veryHigh = {
-        feel: "Very High",
-        color: "red",
-    };
+  var veryHigh = {
+    feel: "Very High",
+    color: "red",
+  };
 
-    var temperatureState =
-        temperature <= 0
-        ? veryLow
-        : temperature <= 10
-        ? low
-        : temperature <= 20
-        ? stable
-        : temperature <= 30
-        ? high
-        : temperature >= 40
-        ? veryHigh
-        : null;
+  var temperatureState =
+    temperature <= 0
+      ? veryLow
+      : temperature <= 10
+      ? low
+      : temperature <= 20
+      ? stable
+      : temperature <= 30
+      ? high
+      : temperature >= 40
+      ? veryHigh
+      : null;
 
-    return temperatureState;
+  return temperatureState;
 }
 
 function getDaytime(timezone, sunrise, sunset) {
-    var currentTime = new Date().toLocaleString("en-US", { timeZone: timezone });
+  var currentTime = new Date().toLocaleString("en-US", { timeZone: timezone });
 
-    console.log(currentTime);
-    console.log(timezone);
-    var sensibleFormat = new Date(currentTime);
-    var currentTimeMilliseconds = sensibleFormat.getTime();
+  console.log(currentTime);
+  console.log(timezone);
+  var sensibleFormat = new Date(currentTime);
+  var currentTimeMilliseconds = sensibleFormat.getTime();
 
-    var day = "day";
-    var night = "night";
+  var day = "day";
+  var night = "night";
 
-    var daytime =
-        currentTimeMilliseconds > sunrise * 1000 &&
-        currentTimeMilliseconds < sunset * 1000
-        ? day
-        : currentTimeMilliseconds < sunrise * 1000 ||
-            currentTimeMilliseconds > sunset * 1000
-        ? night
-        : null;
+  var daytime =
+    currentTimeMilliseconds > sunrise * 1000 &&
+    currentTimeMilliseconds < sunset * 1000
+      ? day
+      : currentTimeMilliseconds < sunrise * 1000 ||
+        currentTimeMilliseconds > sunset * 1000
+      ? night
+      : null;
 
-    return daytime;
+  return daytime;
 }
 
-function getWeatherPreviewResume(feel, sky, daytime) {
-    var weatherPreviewResume = $('<div class="weather_preview__resume"></div>');
-    var resumeFeel = $(`<p class="resume_temp">${feel}</p>`);
-    var resumeSky = $(`<p class="resume_sky">${sky}</p>`);
-    var resumeDaytime = $(` <p class="resume_daytime">${daytime}</p>`);
+function printWeatherPreviewResume(feel, sky, daytime) {
+  var weatherPreviewResume = $('<div class="weather_preview__resume"></div>');
+  var resumeFeel = $(`<p class="resume_temp">${feel}</p>`);
+  var resumeSky = $(`<p class="resume_sky">${sky}</p>`);
+  var resumeDaytime = $(` <p class="resume_daytime">${daytime}</p>`);
 
-    $(".weather_preview").append(weatherPreviewResume);
-    weatherPreviewResume.append(resumeFeel);
-    weatherPreviewResume.append(resumeSky);
-    weatherPreviewResume.append(resumeDaytime);
-
-    console.log(feel);
-    console.log(sky);
+  $(".weather_preview").append(weatherPreviewResume);
+  weatherPreviewResume.append(resumeFeel);
+  weatherPreviewResume.append(resumeSky);
+  weatherPreviewResume.append(resumeDaytime);
 }
 
-function getWeatherPreviewMain(skyIcon) {
-    var weatherPreviewMain = $('<div class="weather_preview__main"></div>');
-    var mainDate = $(`<p>${getCurrentDate()}</p>`);
-    var mainWeekDay = $(`<p>${getCurrentWeekday()}</p>`);
-    var mainIcon = $(`<img src="./assets/icons/cloudy-day-1.svg"/>${skyIcon}`);
+function printWeatherPreviewMain(sky) {
+  var weatherPreviewMain = $('<div class="weather_preview__main"></div>');
+  var mainDate = $(`<p>${getCurrentDate()}</p>`);
+  var mainWeekDay = $(`<p>${getCurrentWeekday()}</p>`);
+  var mainIcon = $(`<img src="${sky}"/>`);
 
-    $(".weather_preview").append(weatherPreviewMain);
-    weatherPreviewMain.append(mainWeekDay);
-    weatherPreviewMain.append(mainDate);
-    weatherPreviewMain.append(mainIcon);
+  $(".weather_preview").append(weatherPreviewMain);
+  weatherPreviewMain.append(mainWeekDay);
+  weatherPreviewMain.append(mainDate);
+  weatherPreviewMain.append(mainIcon);
 }
 
 function getWeatherPreviewWind(speed, degrees) {
-    var weatherPreviewWind = $('<div class="weather_preview__wind"></div>');
-    var windSpeed = $(`<i class="wi wi-wind wi-from-e"></i>`);
-    var windDregrees = $(`<i class="wi wi-wind wi-cloud"></i>`);
+  var weatherPreviewWind = $('<div class="weather_preview__wind"></div>');
+  var windSpeed = $(`<i class="wi wi-wind wi-from-e"></i>`);
+  var windDregrees = $(`<i class="wi wi-wind wi-cloud"></i>`);
 
-    $(".weather_preview").append(weatherPreviewWind);
-    weatherPreviewWind.append(windSpeed);
-    weatherPreviewWind.append(windDregrees);
+  $(".weather_preview").append(weatherPreviewWind);
+  weatherPreviewWind.append(windSpeed);
+  weatherPreviewWind.append(windDregrees);
 }
 
 function getCurrentDate() {
-    var date = new Date();
-    var day = date.getDate();
-    var month = date.getMonth();
-    var year = date.getFullYear();
-    var currentDate = `${day.toString()}/${
-        month.toString() + 1
-    }/${year.toString()}`;
-    console.log(currentDate);
-    return currentDate;
+  var date = new Date();
+  var day = date.getDate();
+  var month = date.getMonth();
+  var year = date.getFullYear();
+  var currentDate = `${day.toString()}/${
+    month.toString() + 1
+  }/${year.toString()}`;
+  console.log(currentDate);
+  return currentDate;
 }
 
 function getCurrentWeekday() {
-    var date = new Date();
-    var weekday = [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-    ];
-    var currentWeekday = weekday[date.getDay()];
-    console.log(currentWeekday);
-    return currentWeekday;
-};
+  var date = new Date();
+  var weekday = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  var currentWeekday = weekday[date.getDay()];
+  console.log(currentWeekday);
+  return currentWeekday;
+}
