@@ -1,10 +1,18 @@
-$(".sidebar_toggle").on("click", function () {
-  $(".sidebar_container").toggle();
-});
-
 $(".btn_search").on("click", function (e) {
-  e.preventDefault();
-  $(".weather_details").html("");
+    e.preventDefault();
+    $('.aside').append(
+        `<i class="fas fa-bars sidebar_toggle"></i>`
+    );
+    $(".sidebar_toggle").on("click", function () {
+        $(".sidebar_container").toggle();
+        $(".sidebar_container").css('background-color', 'rgba(0, 0, 0, 0.6)');
+        $('.input').css('margin','10px 0 0');
+        $('.btn_search').css('margin','10px 0 0 10px');
+        $('.btn_search').css('background-color','white');
+        $('.btn_search').css('color','#474C65');
+    });
+
+    $(".weather_details").html("");
   $(".weather_preview").html("");
 
   $(".sidebar_container").hide();

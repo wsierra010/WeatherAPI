@@ -34,6 +34,7 @@ body {
   line-height: 1;
   font-family: "Roboto", sans-serif;
   box-sizing: border-box;
+  background-image: linear-gradient(to right, #CFE9FE , #B0CAE6);
 }
 ol, ul {
 	list-style: none;
@@ -62,7 +63,7 @@ input {
 
 
 .sidebar_toggle {
-  color: white;
+  color: #080815;
   cursor: pointer;
   padding: 5%;
   position: fixed;
@@ -71,8 +72,8 @@ input {
 }
 
 .sidebar_container {
-  display: none;
-  background-color: rgba(0, 0, 0, 0.6);
+  /* display: none; */
+  /* background-color: rgba(0, 0, 0, 0.6); */
   padding: 5%;
   height: 100%;
   width: 100%;
@@ -90,20 +91,20 @@ input {
 .query_label {
   font-size: 25px;
   margin: 20px 5%;
-  color: white;
+  color: #080815;
 }
 
 .query_input {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
 .input {
   height: 45px;
   padding: 0 10px;
-  border-radius: 20px;
-  border: 1px solid gray;
-  margin: 5px;
+  border-radius: 10px;
+  border: 3px solid #5D71AE;
+  margin: 70% 0 0;
   width: 70%;
 }
 
@@ -112,25 +113,27 @@ input {
   height: 45px;
   width: 45px;
   border: none;
-  margin: 5px;
+  margin: 70% 0 0 15px;
+  background-color: #474C65;
+  color: white;
 }
 
 .results_container {
   padding: 5%;
-  background-color: rgb(89, 108, 218);
+  /* background-color: rgb(89, 108, 218); */
   /* border: 1px solid red; */
 }
 
 .week_weather__nav ul {
   list-style: none;
-  color: white;
+  color: #080815;
   line-height: 2em;
   text-align: right;
   margin: 10%;
 }
 
 .weather_preview__resume p {
-  color: white;
+  color: #080815;
   font-size: 20px;
   margin: 0 10px;
 }
@@ -143,7 +146,7 @@ input {
 }
 
 .weather_preview__main p {
-  color: white;
+  color: #080815;
   font-size: 20px;
   margin: 0 10px;
 }
@@ -165,7 +168,7 @@ input {
 
 .weather_details__temp{
   /* border: 1px solid red; */
-  color: white;
+  color: #080815;
   font-family: 'Montserrat', sans-serif;
 }
 .weather_details_temp__city{
@@ -193,7 +196,7 @@ input {
   align-items: baseline;
   flex-wrap: wrap;
   /* border: 1px solid white; */
-  color: white;
+  color: #080815;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
 }
@@ -204,25 +207,25 @@ input {
 .weather_details_info__sunset{
   /* flex: 10; */
   width: 40%;
-  border: 1px solid white;
+  /* border: 1px solid white; */
   text-align: center;
 }
 .weather_details_info__sunrise{
   /* flex: 10; */
   width: 40%;
-  border: 1px solid white;
+  /* border: 1px solid white; */
   text-align: center;
 }
 .weather_details_info__minTemp{
   /* flex: 5; */
   width: 40%;
-  border: 1px solid white;
+  /* border: 1px solid white; */
   text-align: center;
 }
 .weather_details_info__maxTemp{
   /* flex: 5; */
   width: 40%;
-  border: 1px solid white;
+  /* border: 1px solid white; */
   text-align: center;
 }
 
@@ -232,7 +235,7 @@ input {
   justify-content: space-between;
   align-items: flex-start;
   margin: 3em 0 0;
-  color: white;
+  color: #080815;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   text-align: center;
