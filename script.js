@@ -56,6 +56,15 @@ $(".btn_search").on("click", function (e) {
       // Feels Like round
       const feelsLike = Math.round(response.current.feels_like);
 
+      // var sunsetTime = new Date(response.current.sunset * 1000).toLocaleString("en-US", {
+      //   timeZone: timezone,
+      // });
+      
+      // console.log(sunsetTime);
+      // var senseibleSunset = new Date(sunsetTime).getHours();
+      // var senseibleSunset1 = new Date(sunsetTime).getMinutes();
+      // console.log(senseibleSunset + " : " + senseibleSunset1);
+
       // console.log(Math.round(degree));
       // console.log(dSunset.getHours());
       // console.log(new Date(response.current.dt).getHours());
@@ -97,21 +106,32 @@ $(".btn_search").on("click", function (e) {
             </div>`
       );
 
-      var temperatureFeel = getTemperatureState(Math.round(response.current.temp)).feel;
-      var daytime = getDaytime(response.timezone,response.current.sunrise,response.current.sunset);
-      getWeatherPreviewResume(temperatureFeel, response.current.weather[0].main, daytime);
-      getWeatherPreviewMain(response.current.weather[0].main);
-      // getWeatherPreviewWind(
-      //   response.current.wind_speed,
-      //   response.current.wind_deg
-      // );
+      var temperatureFeel = getTemperatureState(
+        Math.round(response.current.temp)
+      ).feel;
+      var daytime = getDaytime(
+        response.timezone,
+        response.current.sunrise,
+        response.current.sunset
+      );
+      var skyIcon = getSkyIcon(response.current.weather[0].main);
+      getWeatherPreviewResume(
+        temperatureFeel,
+        response.current.weather[0].main,
+        daytime
+      );
+      getWeatherPreviewMain(skyIcon);
+      getWeatherPreviewWind(
+        response.current.wind_speed,
+        response.current.wind_deg
+      );
     });
   }
 });
 
+function getSkyIcon(skyIcon) {}
 
 function getTemperatureState(temperature) {
-
   var veryLow = {
     feel: "Very Cold",
     color: "white",
@@ -153,27 +173,30 @@ function getTemperatureState(temperature) {
   return temperatureState;
 }
 
-function getDaytime(timezone,sunrise,sunset){
-  
-  var currentTime = new Date().toLocaleString('en-US', {timeZone: timezone});
+function getDaytime(timezone, sunrise, sunset) {
+  var currentTime = new Date().toLocaleString("en-US", { timeZone: timezone });
 
-  var sensibleFormat = new Date(currentTime)
-  var currentTimeMilliseconds = sensibleFormat.getTime()
+  console.log(currentTime);
+  console.log(timezone);
+  var sensibleFormat = new Date(currentTime);
+  var currentTimeMilliseconds = sensibleFormat.getTime();
 
   var day = "day";
   var night = "night";
 
-  var daytime = 
-  currentTimeMilliseconds > sunrise*1000 && currentTimeMilliseconds < sunset*1000
-    ? day 
-    : currentTimeMilliseconds < sunrise*1000 || currentTimeMilliseconds > sunset*1000
-    ? night
-    : null ;
-  
-    return daytime;
+  var daytime =
+    currentTimeMilliseconds > sunrise * 1000 &&
+    currentTimeMilliseconds < sunset * 1000
+      ? day
+      : currentTimeMilliseconds < sunrise * 1000 ||
+        currentTimeMilliseconds > sunset * 1000
+      ? night
+      : null;
+
+  return daytime;
 }
 
-function getWeatherPreviewResume(feel,sky,daytime) {
+function getWeatherPreviewResume(feel, sky, daytime) {
   var weatherPreviewResume = $('<div class="weather_preview__resume"></div>');
   var resumeFeel = $(`<p class="resume_temp">${feel}</p>`);
   var resumeSky = $(`<p class="resume_sky">${sky}</p>`);
@@ -188,11 +211,11 @@ function getWeatherPreviewResume(feel,sky,daytime) {
   console.log(sky);
 }
 
-function getWeatherPreviewMain(sky) {
+function getWeatherPreviewMain(skyIcon) {
   var weatherPreviewMain = $('<div class="weather_preview__main"></div>');
   var mainDate = $(`<p>${getCurrentDate()}</p>`);
   var mainWeekDay = $(`<p>${getCurrentWeekday()}</p>`);
-  var mainIcon = $(`<img src="./assets/icons/cloudy-day-1.svg"/>`);
+  var mainIcon = $(`<img src="./assets/icons/cloudy-day-1.svg"/>${skyIcon}`);
 
   $(".weather_preview").append(weatherPreviewMain);
   weatherPreviewMain.append(mainWeekDay);
