@@ -29,6 +29,7 @@ footer, header, hgroup, menu, nav, section {
   display: block;
 }
 body {
+  /* height: 100%; */
   /* max-width: 450px; */
   line-height: 1;
   font-family: "Roboto", sans-serif;
@@ -231,6 +232,10 @@ input {
   justify-content: space-between;
   align-items: flex-start;
   margin: 3em 0 0;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  text-align: center;
 
   overflow-x: auto;
   scroll-snap-type: x mandatory;
@@ -243,13 +248,8 @@ input {
   transform-origin: center center;
   transform: scale(1);
   transition: transform 0.5s;
+  overflow: hidden;
 }
-.weather_hours__one,
-.weather_hours__two,
-.weather_hours__three,
-.weather_hours__four,
-.weather_hours__five{
-  border: 1px solid white;
-  /* width: 100px; */
+.weather_hours_container__temp{
+  font-weight: 600;
 }
-

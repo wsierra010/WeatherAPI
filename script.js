@@ -40,78 +40,63 @@ $(".btn_search").on("click", function (e) {
       timeout: 0,
     };
 
-    $.ajax(settings).done(function (response) {
-      const NowDateSunrise = response.current.sunrise;
-      const NowDateSunset = response.current.sunset;
-      // Date Sunrise Current
-      const dSunrise = new Date(NowDateSunrise * 1000);
-      const hourSunrise = dSunrise.getHours();
-      const minuteSunrise = dSunrise.getMinutes();
-      // Date Sunset Current
-      const dSunset = new Date(NowDateSunset * 1000);
-      const hourSunset = dSunset.getHours();
-      const minuteSunset = dSunset.getMinutes();
-      // Degrees only Int
-      const degree = Math.round(response.current.temp);
-      // Feels Like round
-      const feelsLike = Math.round(response.current.feels_like);
+        $.ajax(settings).done(function (response) {
+        // console.log(response.current.sunrise);
+        const NowDateSunrise = response.current.sunrise;
+        const NowDateSunset = response.current.sunset;
+        // Date Sunrise Current
+        const dSunrise = new Date(NowDateSunrise*1000);
+        // Date Sunset Current
+        const dSunset = new Date(NowDateSunset*1000);
+        // Degrees only Int
+        const degree = Math.round(response.current.temp);
+        // Feels Like round
+        const feelsLike = Math.round(response.current.feels_like);
 
-      // Max Temp round
-      const maxTemp = Math.round(currentWeather.main.temp_max);
-      // Min Temp round
-      const minTemp = Math.round(currentWeather.main.temp_min);
+        // Max Temp round
+        const maxTemp = Math.round(currentWeather.main.temp_max);
+        // Min Temp round
+        const minTemp = Math.round(currentWeather.main.temp_min);
 
-      //     $('.weather_details').append(
-      //         `<div class="weather_details__temp">
-      //   const NowDateSunrise = response.current.sunrise;
-      //   const NowDateSunset = response.current.sunset;
-      //   Date Sunrise Current
-      //   const dSunrise = new Date(NowDateSunrise * 1000);
-      //   const hourSunrise = dSunrise.getHours();
-      //   const minuteSunrise = dSunrise.getMinutes();
-      //   Date Sunset Current
-      //   const dSunset = new Date(NowDateSunset * 1000);
-      //   const hourSunset = dSunset.getHours();
-      //   const minuteSunset = dSunset.getMinutes();
-      //   Degrees only Int
-      //   const degree = Math.round(response.current.temp);
-      //   Feels Like round
-      //   const feelsLike = Math.round(response.current.feels_like);
 
-      //   var sunsetTime = new Date(response.current.sunset * 1000).toLocaleString("en-US", {
-      //      timeZone: timezone,
-      //    });
+        var sunsetTime = new Date(dSunset).toLocaleString("en-US", { timeZone: response.timezone });
+        var sunriseTime = new Date(dSunrise).toLocaleString("en-US", { timeZone: response.timezone });
 
-      //   // console.log(sunsetTime);
-      //   // var senseibleSunset = new Date(sunsetTime).getHours();
-      //   // var senseibleSunset1 = new Date(sunsetTime).getMinutes();
-      //   // console.log(senseibleSunset + " : " + senseibleSunset1);
+        // console.log(sunsetTime);
+        // SUNSET TIME
+        var hourSunset = new Date(sunsetTime).getHours();
+        var minuteSunset = new Date(sunsetTime).getMinutes();
 
-      //   // console.log(Math.round(degree));
-      //   // console.log(dSunset.getHours());
-      //   // console.log(new Date(response.current.dt).getHours());
-      //   // console.log(new Date(prueba*1000).getHours());
-      //   // console.log(response.current.sunrise);
-      //   // console.log(response.current.sunset);
+        // SUNRISE TIME
+        var hourSunrise = new Date(sunriseTime).getHours();
+        var minuteSunrise = new Date(sunriseTime).getMinutes();
+        // console.log(senseibleSunset + " : " + senseibleSunset1);
 
-      $(".weather_details").append(
+        const hour1 = new Date((response.hourly[0].dt)*1000);
+        const hourNow = hour1.getHours();
+
+
+         // console.log(Math.round(degree));
+         // console.log(dSunset.getHours());
+         // console.log(new Date(response.current.dt).getHours());
+         // console.log(new Date(prueba*1000).getHours());
+         // console.log(response.current.sunrise);
+         // console.log(response.current.sunset);
+
+        $(".weather_details").append(
         `<div class="weather_details__temp">
                 <p class="weather_details_temp__city">${city}</p>
                 <p class="weather_details_temp__degrees">${degree}º </p>
                 <p class="weather_details_temp__feelsLike">feels like ${feelsLike}º</p>
             </div>
             <div class="weather_details__info">
-                <div class="weather_details_info__sunset">
-                    <img src="assets/icons/sunset.svg" alt="sunsetIcon" class="weather_details_info__img">
-                    <p class="weather_details_info_sunset__hour">${
-                      hourSunrise + ":" + minuteSunrise
-                    }h</p>
-                </div>
                 <div class="weather_details_info__sunrise">
                     <img class="weather_details_info__img" src="assets/icons/sunset.svg" alt="">
-                    <p class="weather_details_info_sunrise__hour">${
-                      hourSunset + ":" + minuteSunset
-                    }h</p>
+                    <p class="weather_details_info_sunrise__hour">${hourSunrise+':'+minuteSunrise}h</p>
+                </div>
+                <div class="weather_details_info__sunset">
+                    <img src="assets/icons/sunset.svg" alt="sunsetIcon" class="weather_details_info__img">
+                    <p class="weather_details_info_sunset__hour">${hourSunset+':'+minuteSunset}h</p>
                 </div>
                 <div class="weather_details_info__minTemp">
                     <img class="weather_details_info__img" src="assets/icons/coldTherm.svg" alt="">
@@ -122,7 +107,26 @@ $(".btn_search").on("click", function (e) {
                     <p class="weather_details_info_maxTemp__data">${maxTemp}º</p>
                 </div>
             </div>`
-      );
+    );
+    response.hourly.forEach((e,i) => {
+        // console.log(getSkyIcon(e.weather.main));
+        if(i<=23){
+            // Milliseconds to Hours
+            const hour1 = new Date((e.dt)*1000);
+            const hourNow = hour1.getHours();
+            // Temp round
+            const tempHour = Math.round(e.temp);
+
+
+            $('.weather_hours').append(
+                `<div class="weather_hours__container">
+                <p class="weather_hours_container__hour">${hourNow}</p>
+                <img class="weather_hours_container__icon" src="${getSkyIcon(e.weather[0].main)}" alt="">
+                <p class="weather_hours_container__temp">${tempHour}º</p>
+            </div>`
+                )
+        }
+    });
 
       var temperatureFeel = getTemperatureState(
         Math.round(response.current.temp)
