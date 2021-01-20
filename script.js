@@ -41,16 +41,13 @@ function getCityName(lon, lat) {
     };
 
         $.ajax(settings).done(function (response) {
+        // console.log(response.current.sunrise);
         const NowDateSunrise = response.current.sunrise;
         const NowDateSunset = response.current.sunset;
         // Date Sunrise Current
         const dSunrise = new Date(NowDateSunrise*1000);
-        const hourSunrise = dSunrise.getHours();
-        const minuteSunrise = dSunrise.getMinutes();
         // Date Sunset Current
         const dSunset = new Date(NowDateSunset*1000);
-        const hourSunset = dSunset.getHours();
-        const minuteSunset = dSunset.getMinutes();
         // Degrees only Int
         const degree = Math.round(response.current.temp);
         // Feels Like round
@@ -59,41 +56,29 @@ function getCityName(lon, lat) {
         // Max Temp round
         const maxTemp = Math.round(currentWeather.main.temp_max);
         // Min Temp round
-        const minTemp = Math.round(currentWeather.main.temp_min)
-
-    //     $('.weather_details').append(
-    //         `<div class="weather_details__temp">
-    //   const NowDateSunrise = response.current.sunrise;
-    //   const NowDateSunset = response.current.sunset;
-    //   Date Sunrise Current
-    //   const dSunrise = new Date(NowDateSunrise * 1000);
-    //   const hourSunrise = dSunrise.getHours();
-    //   const minuteSunrise = dSunrise.getMinutes();
-    //   Date Sunset Current
-    //   const dSunset = new Date(NowDateSunset * 1000);
-    //   const hourSunset = dSunset.getHours();
-    //   const minuteSunset = dSunset.getMinutes();
-    //   Degrees only Int
-    //   const degree = Math.round(response.current.temp);
-    //   Feels Like round
-    //   const feelsLike = Math.round(response.current.feels_like);
-
-    //   var sunsetTime = new Date(response.current.sunset * 1000).toLocaleString("en-US", {
-    //      timeZone: timezone,
-    //    });
-
-    //   // console.log(sunsetTime);
-    //   // var senseibleSunset = new Date(sunsetTime).getHours();
-    //   // var senseibleSunset1 = new Date(sunsetTime).getMinutes();
-    //   // console.log(senseibleSunset + " : " + senseibleSunset1);
+        const minTemp = Math.round(currentWeather.main.temp_min);
 
 
-    //   // console.log(Math.round(degree));
-    //   // console.log(dSunset.getHours());
-    //   // console.log(new Date(response.current.dt).getHours());
-    //   // console.log(new Date(prueba*1000).getHours());
-    //   // console.log(response.current.sunrise);
-    //   // console.log(response.current.sunset);
+        var sunsetTime = new Date(dSunset).toLocaleString("en-US", { timeZone: response.timezone });
+        var sunriseTime = new Date(dSunrise).toLocaleString("en-US", { timeZone: response.timezone });
+
+        // console.log(sunsetTime);
+        // SUNSET TIME
+        var hourSunset = new Date(sunsetTime).getHours();
+        var minuteSunset = new Date(sunsetTime).getMinutes();
+
+        // SUNRISE TIME
+        var hourSunrise = new Date(sunriseTime).getHours();
+        var minuteSunrise = new Date(sunriseTime).getMinutes();
+        // console.log(senseibleSunset + " : " + senseibleSunset1);
+
+
+         // console.log(Math.round(degree));
+         // console.log(dSunset.getHours());
+         // console.log(new Date(response.current.dt).getHours());
+         // console.log(new Date(prueba*1000).getHours());
+         // console.log(response.current.sunrise);
+         // console.log(response.current.sunset);
 
         $(".weather_details").append(
         `<div class="weather_details__temp">
@@ -102,13 +87,13 @@ function getCityName(lon, lat) {
                 <p class="weather_details_temp__feelsLike">feels like ${feelsLike}º</p>
             </div>
             <div class="weather_details__info">
-                <div class="weather_details_info__sunset">
-                    <img src="assets/icons/sunset.svg" alt="sunsetIcon" class="weather_details_info__img">
-                    <p class="weather_details_info_sunset__hour">${hourSunrise+':'+minuteSunrise}h</p>
-                </div>
                 <div class="weather_details_info__sunrise">
                     <img class="weather_details_info__img" src="assets/icons/sunset.svg" alt="">
-                    <p class="weather_details_info_sunrise__hour">${hourSunset+':'+minuteSunset}h</p>
+                    <p class="weather_details_info_sunrise__hour">${hourSunrise+':'+minuteSunrise}h</p>
+                </div>
+                <div class="weather_details_info__sunset">
+                    <img src="assets/icons/sunset.svg" alt="sunsetIcon" class="weather_details_info__img">
+                    <p class="weather_details_info_sunset__hour">${hourSunset+':'+minuteSunset}h</p>
                 </div>
                 <div class="weather_details_info__minTemp">
                     <img class="weather_details_info__img" src="assets/icons/coldTherm.svg" alt="">
