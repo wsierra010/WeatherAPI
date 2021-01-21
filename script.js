@@ -145,7 +145,6 @@ $(".btn_search").on("click", function (e) {
         response.current.sunrise,
         response.current.sunset
       );
-
       printWeatherPreviewResume(
         temperatureFeel,
         response.current.weather[0].main,
@@ -153,30 +152,33 @@ $(".btn_search").on("click", function (e) {
       );
 
       var skyIcon = getSkyIcon(response.current.weather[0].main);
-      console.log(skyIcon);
       printWeatherPreviewMain(skyIcon);
 
+      var speedState = getWindSpeedState(response.current.wind_speed);
+      var degreesIcon = getWindDegreesState(response.current.wind_deg).icon;
+      var degreesText = getWindDegreesState(response.current.wind_deg).text;
       getWeatherPreviewWind(
         response.current.wind_speed,
-        response.current.wind_deg
+        speedState,
+        degreesText,
+        degreesIcon
       );
     });
   }
 });
 
 function getSkyIcon(sky) {
-
   var setSkyState;
 
   var skyState = {
-    thunderstorm : "./assets/icons/thunder.svg",
-    drizzle : "./assets/icons/rainy-2.svg",
-    rain : "./assets/icons/rainy-5.svg",
-    snow : "./assets/icons/snowy-3.svg",
-    athmosphere : "./assets/icons/cloudy-day-1.svg",
-    clear : "./assets/icons/day.svg",
-    clouds : "./assets/icons/cloudy.svg",
-  }
+    thunderstorm: "./assets/icons/thunder.svg",
+    drizzle: "./assets/icons/rainy-2.svg",
+    rain: "./assets/icons/rainy-5.svg",
+    snow: "./assets/icons/snowy-3.svg",
+    athmosphere: "./assets/icons/cloudy-day-1.svg",
+    clear: "./assets/icons/day.svg",
+    clouds: "./assets/icons/cloudy.svg",
+  };
 
   switch (sky) {
     case "Thunderstorm":
@@ -205,12 +207,120 @@ function getSkyIcon(sky) {
   }
 
   return setSkyState;
+}
 
+function getWindSpeedState(speed) {
+
+  var windSpeedState = {
+    calm: "./assets/icons/wind-icons/calm.png",
+    lightAir: "./assets/icons/wind-icons/light-air.png",
+    lightBreeze: "./assets/icons/wind-icons/light-breeze.png",
+    gentleBreeze: "./assets/icons/wind-icons/gentle-breeze.png",
+    moderateBreeze: "./assets/icons/wind-icons/moderate-breeze.png",
+    freshBreeze: "./assets/icons/wind-icons/fresh-breeze.png",
+    strongBreeze: "./assets/icons/wind-icons/strong-breeze.png",
+    moderateGale: "./assets/icons/wind-icons/moderate-gal.png",
+    freshGale: "./assets/icons/wind-icons/fresh-gale.png",
+    strongGale: "./assets/icons/wind-icons/strong-gale.png",
+    wholeGale: "./assets/icons/wind-icons/whole-gale.png",
+    storm: "./assets/icons/wind-icons/storm.png",
+    hurricane: "./assets/icons/wind-icons/hurricane.png",
+  };
+
+  var setWindSpeedState =
+    speed < 0.5
+      ? windSpeedState.calm
+      : speed < 1.6
+      ? windSpeedState.lighAir
+      : speed < 3.3
+      ? windSpeedState.lightBreeze
+      : speed < 5.5
+      ? windSpeedState.gentleBreeze
+      : speed < 8
+      ? windSpeedState.moderateBreeze
+      : speed < 10.8
+      ? windSpeedState.freshBreeze
+      : speed < 13.8
+      ? windSpeedState.strongBreeze
+      : speed < 17.2
+      ? windSpeedState.moderateGale
+      : speed < 20.8
+      ? windSpeedState.freshGale
+      : speed < 24.7
+      ? windSpeedState.strongGale
+      : speed < 28.6
+      ? windSpeedState.wholeGale
+      : speed < 32.7
+      ? windSpeedState.storm
+      : speed > 32.7
+      ? windSpeedState.hurricane
+      : null;
+
+  return setWindSpeedState;
+}
+
+function getWindDegreesState(degrees) {
+
+  var windDegreesState = {
+    n: {
+      icon: "north",
+      text: "N",
+    },
+    ne: {
+      icon: "northEast",
+      text: "NE",
+    },
+    e: {
+      icon: "east",
+      text: "E"
+    },
+    se: {
+      icon: "southEast",
+      text: "SE",
+    },
+    s: {
+      icon: "south",
+      text: "S",
+    },
+    sw: {
+      icon: "southWest",
+      text: "SW",
+    },
+    w: {
+      icon: "west",
+      text: "W",
+    },
+    nw: {
+      icon: "northWest",
+      text: "NW"
+    },
+  }
+
+  var setWindDegreesState = 
+    degrees < 11.25
+    ? windDegreesState.n:
+    degrees < 56.25
+    ?windDegreesState.ne:
+    degrees < 101.25
+    ? windDegreesState.e:
+    degrees < 146.25
+    ?windDegreesState.se:
+    degrees < 191.25
+    ? windDegreesState.s:
+    degrees < 236.25
+    ? windDegreesState.sw:
+    degrees < 281.25
+    ? windDegreesState.nw:
+    degrees < 326.25
+    ? windDegreesState.s:
+    null;
+
+    return setWindDegreesState;
 }
 
 function getTemperatureState(temperature) {
   var veryLow = {
-    feel: "Very Cold",
+    feel: " Freezing cold",
     color: "white",
   };
 
@@ -297,14 +407,23 @@ function printWeatherPreviewMain(sky) {
   weatherPreviewMain.append(mainIcon);
 }
 
-function getWeatherPreviewWind(speed, degrees) {
+function getWeatherPreviewWind(speed, sepeedIcon, degrees, degreesIcon) {
+  var speedKmH = Math.round((speed * (60 * 60)) / 1000);
   var weatherPreviewWind = $('<div class="weather_preview__wind"></div>');
-  var windSpeed = $(`<i class="wi wi-wind wi-from-e"></i>`);
-  var windDregrees = $(`<i class="wi wi-wind wi-cloud"></i>`);
+  var divSpeed = $('<div class="wind_speed"></div>')
+  var windSpeedIcon = $(`<img src="${sepeedIcon}"></i>`);
+  var windSpeed = $(`<p>${speedKmH} km/h</p>`);
+  var divDegrees = $('<div class="wind_degrees"></div>')
+  var windDegrees = $(`<p>${degrees}</p>`);
+  var windDregreesIcon = $(`<img src="./assets/icons/compass1.svg" class="${degreesIcon}"/>`);
 
   $(".weather_preview").append(weatherPreviewWind);
-  weatherPreviewWind.append(windSpeed);
-  weatherPreviewWind.append(windDregrees);
+  weatherPreviewWind.append(divSpeed);
+  divSpeed.append(windSpeedIcon);
+  divSpeed.append(windSpeed);
+  weatherPreviewWind.append(divDegrees);
+  divDegrees.append(windDregreesIcon);
+  divDegrees.append(windDegrees);
 }
 
 function getCurrentDate() {
