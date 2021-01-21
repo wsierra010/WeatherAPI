@@ -241,7 +241,7 @@ function getWindSpeedState(speed) {
     speed < 0.5
       ? windSpeedState.calm
       : speed < 1.6
-      ? windSpeedState.lighAir
+      ? windSpeedState.lightAir
       : speed < 3.3
       ? windSpeedState.lightBreeze
       : speed < 5.5
