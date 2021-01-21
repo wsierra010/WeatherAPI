@@ -136,6 +136,12 @@ $(".btn_search").on("click", function (e) {
         }
     });
 
+      var backgroundColor = getTemperatureState(
+        Math.round(response.current.temp)
+      ).color;
+
+      printBackgroundColor(backgroundColor);
+
       var temperatureFeel = getTemperatureState(
         Math.round(response.current.temp)
       ).feel;
@@ -145,6 +151,7 @@ $(".btn_search").on("click", function (e) {
         response.current.sunrise,
         response.current.sunset
       );
+      
       printWeatherPreviewResume(
         temperatureFeel,
         response.current.weather[0].main,
@@ -152,11 +159,13 @@ $(".btn_search").on("click", function (e) {
       );
 
       var skyIcon = getSkyIcon(response.current.weather[0].main);
+      
       printWeatherPreviewMain(skyIcon);
 
       var speedState = getWindSpeedState(response.current.wind_speed);
       var degreesIcon = getWindDegreesState(response.current.wind_deg).icon;
       var degreesText = getWindDegreesState(response.current.wind_deg).text;
+     
       getWeatherPreviewWind(
         response.current.wind_speed,
         speedState,
@@ -166,6 +175,7 @@ $(".btn_search").on("click", function (e) {
     });
   }
 });
+
 
 function getSkyIcon(sky) {
   var setSkyState;
@@ -231,7 +241,7 @@ function getWindSpeedState(speed) {
     speed < 0.5
       ? windSpeedState.calm
       : speed < 1.6
-      ? windSpeedState.lighAir
+      ? windSpeedState.lightAir
       : speed < 3.3
       ? windSpeedState.lightBreeze
       : speed < 5.5
@@ -321,39 +331,39 @@ function getWindDegreesState(degrees) {
 function getTemperatureState(temperature) {
   var veryLow = {
     feel: " Freezing cold",
-    color: "white",
+    color: "linear-gradient(to right, #F6CFFE , #F5D1F6)",
   };
 
   var low = {
     feel: "Cold",
-    color: "blue",
+    color: "linear-gradient(to right, #CFE9FE , #B0CAE6)",
   };
 
   var stable = {
     feel: "Warm",
-    color: "green",
+    color: "linear-gradient(to right, #FBFF8E, #B6CD74)",
   };
 
   var high = {
     feel: "High",
-    color: "orange",
+    color: "linear-gradient(to right, #FEDDC0 , #E5C28C)",
   };
 
   var veryHigh = {
     feel: "Very High",
-    color: "red",
+    color: "linear-gradient(to right, #C57265 , #EFCAA2)",
   };
 
   var temperatureState =
     temperature <= 0
       ? veryLow
-      : temperature <= 10
+      : temperature <= 12
       ? low
-      : temperature <= 20
+      : temperature <= 23
       ? stable
-      : temperature <= 30
+      : temperature <= 32
       ? high
-      : temperature >= 40
+      : temperature > 32
       ? veryHigh
       : null;
 
@@ -381,6 +391,10 @@ function getDaytime(timezone, sunrise, sunset) {
       : null;
 
   return daytime;
+}
+
+function printBackgroundColor (color) {
+  $("body").css("background-image", `${color}`)
 }
 
 function printWeatherPreviewResume(feel, sky, daytime) {
