@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "fa7b318c-8ab6-4a6e-9687-49e6a627f997",
+		"name": "Weather API Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api.openweathermap.org/data/2.5/weather?q=Barcelona&appid=84001e7bfdb9a6e78a0b7b03512f2b90&units=metric",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "api.openweathermap.org/data/2.5/weather?q=valencia&appid=84001e7bfdb9a6e78a0b7b03512f2b90&units=metric",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "valencia"
+						},
+						{
+							"key": "appid",
+							"value": "84001e7bfdb9a6e78a0b7b03512f2b90"
+						},
+						{
+							"key": "units",
+							"value": "metric"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=hourly,daily&appid=ef8c46d94877be6e25c248a610296d01",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=minutely&appid=ef8c46d94877be6e25c248a610296d01&units=metric",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"onecall"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "33.441792"
+						},
+						{
+							"key": "lon",
+							"value": "-94.037689"
+						},
+						{
+							"key": "exclude",
+							"value": "minutely"
+						},
+						{
+							"key": "appid",
+							"value": "ef8c46d94877be6e25c248a610296d01"
+						},
+						{
+							"key": "units",
+							"value": "metric"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
